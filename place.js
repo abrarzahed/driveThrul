@@ -17,14 +17,11 @@ function initMap() {
   input.addEventListener("input", () => {
     const container = document.querySelector(".pac-container");
     container.classList.remove("pac-logo");
-    const innerDiv = document.createElement("div");
-    innerDiv.classList.add("inner");
 
     if (input.value.length == 0) {
       resultDiv.classList.add("hidden");
     }
 
-    container.append(innerDiv);
     console.log("pac-container", container);
     console.log("autocomplete", autocomplete);
   });
