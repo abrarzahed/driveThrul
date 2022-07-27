@@ -21,13 +21,15 @@
 }
 .search_area-left {
   display: grid;
-  gap: 0.6rem;
+  gap: 1rem;
   width: 50%;
 }
 .search_area-left--title {
   line-height: 1.5;
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-weight: 400;
+  font-size: 28px;
+  color: #555;
+  text-transform: capitalize;
 }
 .search_area-input-group {
   display: flex;
@@ -54,7 +56,7 @@
   border-radius: 8px;
   background: #2c3d55;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 0.85714rem;
   transition: 0.2s;
 }
 .search_area-input-group button:hover {
@@ -63,7 +65,7 @@
 }
 .search_area--result {
   background: #2c3d55;
-  padding: 1rem 1.2rem;
+  padding: 1.5rem 1.2rem;
   margin-top: 1rem;
   display: grid;
   gap: 1rem;
@@ -85,11 +87,12 @@
   border: none;
   outline: none;
   color: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 100px;
-  font-weight: 700;
+  padding: 1.07143rem 2.14286rem;
+  border-radius: 50px;
+  font-weight: 700 !important;
   cursor: pointer;
   transition: 0.2s;
+  font-size: 0.85714rem;
 }
 .search_area--result-right .book:hover {
   background: #d01337;
@@ -128,7 +131,7 @@
   content: "";
   height: 100%;
   background: #d01337;
-  width: 30%;
+  width: 20%;
   left: 0;
   border-radius: 8px;
   z-index: -1;
@@ -171,6 +174,9 @@
   .search_area--result {
     flex-direction: column;
     text-align: center;
+  }
+  .search_area-right a::before {
+    width: 15%;
   }
 }
 @media (max-width: 350px) {
