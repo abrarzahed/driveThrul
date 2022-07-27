@@ -198,6 +198,9 @@
   .search_area-right a::before {
     width: 15%;
   }
+  .search_area-left--title {
+    font-size: 18px;
+  }
 }
 @media (max-width: 350px) {
   .search_area-input-group {
