@@ -124,13 +124,28 @@
   opacity: 0;
   transition: 0.3s linear;
 }
+.search_area--result.hidden * {
+  opacity: 0;
+  transition: 0.1s linear;
+}
+.not-found .search_area--result-left {
+  flex-basis: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.not-found .search_area--result-right .book {
+  display: none;
+}
 
 .search_area-right {
   width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.7rem;
+  color: #fff;
 }
+
 .search_area-right a {
   isolation: isolate;
   padding: 1rem;
