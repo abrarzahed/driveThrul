@@ -18,49 +18,35 @@ function initMap() {
     {
       formattedAddress: "London SW1A, UK",
       areaName: "sw1a",
-      price: "$120 for SW1a",
-      info: "5 HOURS BLOCK BOOKING",
-      auto: [
-        { hour: 2, price: "$70" },
-        { hour: 4, price: "$90" },
-        { hour: 6, price: "$110" },
-      ],
-      manual: [
-        { hour: 2, price: "$110" },
-        { hour: 4, price: "$150" },
-        { hour: 6, price: "$190" },
-      ],
-    },
-    {
-      formattedAddress: "Southall UB1, UK",
-      areaName: "ub1",
-      price: "$220 for UB1",
-      info: "15 HOURS BLOCK BOOKING",
-      auto: [
-        { hour: 2, price: "$71" },
-        { hour: 4, price: "$91" },
-        { hour: 6, price: "$111" },
-      ],
-      manual: [
-        { hour: 2, price: "$112" },
-        { hour: 4, price: "$151" },
-        { hour: 6, price: "$191" },
-      ],
-    },
-    {
-      formattedAddress: "Plymouth PL5, UK",
-      areaName: "pl5",
-      price: "$320 for PL5",
-      info: "55 HOURS BLOCK BOOKING",
-      auto: [
-        { hour: 2, price: "$72" },
-        { hour: 4, price: "$92" },
-        { hour: 6, price: "$113" },
-      ],
-      manual: [
-        { hour: 2, price: "$117" },
-        { hour: 4, price: "$155" },
-        { hour: 6, price: "$199" },
+      priceList: [
+        {
+          detail: "2 FULL Hour - Taster Lesson / £60",
+          hour: 2,
+          price: "£60",
+          gearBox: "manual",
+          id: 1,
+        },
+        {
+          detail: "5 Hours - Block OFFER / £160",
+          hour: 5,
+          price: "£160",
+          gearBox: "automatic",
+          id: 2,
+        },
+        {
+          detail: "10 Hours - Block OFFER / £310",
+          hour: 10,
+          price: "£310",
+          gearBox: "manual",
+          id: 3,
+        },
+        {
+          detail: "20 Hours - Block OFFER / £610",
+          hour: 20,
+          price: "£610",
+          gearBox: "automatic",
+          id: 4,
+        },
       ],
     },
   ];
@@ -76,7 +62,6 @@ function initMap() {
 
     if (input.value.length == 0) {
       resultDiv.classList.add("hidden");
-      // selectedArea = {};
     }
   });
 
@@ -89,26 +74,46 @@ function initMap() {
       priceCardsManual.innerHTML = "";
       priceCardsAuto.innerHTML = "";
 
-      area.manual.forEach((area) => {
-        priceCardsManual.innerHTML += `
+      area.priceList
+        .filter((ar) => ar.gearBox === "manual")
+        .forEach((area) => {
+          priceCardsManual.innerHTML += `
         <div class="gearbox-card">
         <span>${area.hour}</span>
         <span>Hours</span>
         <span>${area.price}</span>
-        <a href="#" class="gearbox-link">BOOK</a>
+        <a  href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
         </div>
         `;
-      });
+        });
 
-      area.auto.forEach((area) => {
-        priceCardsAuto.innerHTML += `
+      area.priceList
+        .filter((ar) => ar.gearBox === "automatic")
+        .forEach((area) => {
+          priceCardsAuto.innerHTML += `
         <div class="gearbox-card">
         <span>${area.hour}</span>
         <span>Hours</span>
         <span>${area.price}</span>
-        <a href="#" class="gearbox-link">BOOK</a>
+        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
         </div>
         `;
+        });
+
+      const cardButtons = document.querySelectorAll(".gearbox-link");
+      [...cardButtons].forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const selectedId = +btn.dataset.id;
+          const selectedPackage = area.priceList.find(
+            (ar) => ar.id === selectedId
+          );
+          localStorage.setItem(
+            "selectedPackage",
+            JSON.stringify(selectedPackage)
+          );
+          window.location.assign("area.html");
+        });
       });
 
       resultDiv.classList.remove("not-found");
@@ -128,35 +133,13 @@ function initMap() {
     } else {
       showResult(selectedArea, true);
     }
-    // console.log("selected area", selectedArea);
   };
-
-  //=== select area by clicking on button  ===//
-  /*
-  btnSearch.addEventListener("click", function () {
-    if (input.value.length > 0) {
-      const place = autocomplete.getPlace();
-      selectArea(place);
-    }
-  });
-  */
 
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
     selectArea(place);
-    // console.log("place", place);
-
-    //=== redirect  ===//
-    /*
-    const urlParams = new URLSearchParams(window.location.search);
-    window.location.assign(`/area.html?place=${place.formatted_address}`)
-    urlParams.set('place', place.name);
-    window.location.search = urlParams;
-    */
 
     if (!place.geometry || !place.geometry.location) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
       window.alert("No details available for input: '" + place.name + "'");
       return;
     }

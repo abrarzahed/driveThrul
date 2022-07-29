@@ -8,29 +8,217 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1
-      style="
-        text-align: center;
-        font-family: sans-serif;
-        margin-top: 2rem;
-        font-size: 1.4rem;
-      "
-    >
-      The below area name is based on dynamic content from the google place API
-    </h1>
-    <div class="dynamic-content">
-      <div class="dynamic-heading"></div>
-    </div>
-    <script>
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let value = params.place; // "some_value"
-      console.log(value);
+    <!-- **************************************** 
+COMMENT: contact form starts here   
+***************************************** -->
+    <div class="g-brd-around g-brd-gray-light-v4 g-pa-10 mb-5 g-pt-20">
+      <form
+        method="POST"
+        action="email-helper/form_handler_booking.php"
+        id="contact-form"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="row">
+          <div class="col mr-4">
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13"
+                >Your Name *</label
+              >
+              <input
+                class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--focus rounded-3 g-py-13 g-px-15"
+                type="text"
+                placeholder="John Doe"
+                name="name"
+                required
+              />
+              <div class="invalid-feedback">Please provide your name.</div>
+            </div>
 
-      document.querySelector(".dynamic-content");
-      document.querySelector(".dynamic-heading").textContent += value;
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13">Phone *</label>
+              <input
+                class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--focus rounded-3 g-py-13 g-px-15"
+                type="text"
+                placeholder="i.e. 07790 820820"
+                name="phone"
+                required
+              />
+              <div class="invalid-feedback">
+                Please provide a valid phone number.
+              </div>
+            </div>
+
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13"
+                >Your email *</label
+              >
+              <input
+                class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--focus rounded-3 g-py-13 g-px-15"
+                type="email"
+                placeholder="i.e. johndoe@gmail.com"
+                name="email"
+                required
+              />
+              <div class="invalid-feedback">
+                Please provide a valid email address.
+              </div>
+            </div>
+
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13"
+                >Postal code</label
+              >
+              <input
+                class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--focus rounded-3 g-py-13 g-px-15"
+                type="text"
+                placeholder="i.e. E14 8PX"
+                name="postal"
+              />
+            </div>
+
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13"
+                >Select car type :</label
+              >
+              <div class="form-check">
+                <input
+                  id="radioManual"
+                  class="form-check-input type-selector"
+                  type="radio"
+                  name="carType"
+                  value="manual"
+                />
+                <label class="form-check-label" for="radioManual">
+                  Manual
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  id="radioAutomatic"
+                  class="form-check-input type-selector"
+                  type="radio"
+                  name="carType"
+                  value="automatic"
+                />
+                <label class="form-check-label" for="radioAutomatic">
+                  Automatic
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group g-mb-20">
+              <label>Which lesson do you want to buy: </label>
+              <select class="form-control price-dropdown" name="lesson">
+                <option disabled selected value>-- select an option --</option>
+                <option>2 FULL Hour - Taster Lesson / £60</option>
+
+                <option>5 Hours - Block OFFER / £160</option>
+                <option>10 Hours - Block OFFER / £310</option>
+                <option>20 Hours - Block OFFER / £610</option>
+              </select>
+            </div>
+
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13"
+                >Preferred time :</label
+              >
+              <div class="form-check">
+                <input
+                  id="timeAM"
+                  class="form-check-input"
+                  type="radio"
+                  name="time"
+                  value="AM"
+                />
+                <label class="form-check-label" for="timeAM"> AM </label>
+              </div>
+              <div class="form-check">
+                <input
+                  id="timePM"
+                  class="form-check-input"
+                  type="radio"
+                  name="time"
+                  value="PM"
+                />
+                <label class="form-check-label" for="timePM"> PM </label>
+              </div>
+              <div class="form-check">
+                <input
+                  id="timeWeekends"
+                  class="form-check-input"
+                  type="radio"
+                  name="time"
+                  value="WEEKENDS"
+                />
+                <label class="form-check-label" for="timeWeekends">
+                  WEEKENDS
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group g-mb-20">
+              <label class="g-color-gray-dark-v2 g-font-size-13"
+                >Your message *</label
+              >
+              <textarea
+                class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--focus g-resize-none rounded-3 g-py-13 g-px-15"
+                rows="12"
+                placeholder="Hi there, I would like to ..."
+                name="message"
+                required
+              ></textarea>
+            </div>
+            <div class="invalid-feedback">Please provide your message.</div>
+          </div>
+        </div>
+
+        <div class="text-left mb-2">
+          <button
+            id="submitButton"
+            class="btn u-btn-primary g-font-weight-600 g-font-size-13 text-uppercase rounded-3 g-py-12 g-px-35"
+            type="submit"
+            role="button"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- **************************************** 
+COMMENT: contact form ends here   
+***************************************** -->
+
+    <script>
+      const selectedPackage = JSON.parse(
+        localStorage.getItem("selectedPackage")
+      );
+
+      if (selectedPackage) {
+        /*
+        COMMENT: Select dynamic lesson type
+      */
+        const lessonTypeDomEl = [
+          ...document.querySelectorAll(".type-selector"),
+        ].find((input) => {
+          return input.value === selectedPackage.gearBox;
+        });
+        lessonTypeDomEl.checked = true;
+
+        /*
+        COMMENT: Select dynamic price
+      */
+        const priceDomEl = document.querySelector(".price-dropdown");
+        priceDomEl.value = selectedPackage.detail;
+      }
+
+      /* 
+        COMMENT: Reset localStorage
+      */
+      window.onbeforeunload = function () {
+        localStorage.setItem("selectedPackage", null);
+      };
     </script>
   </body>
 </html>

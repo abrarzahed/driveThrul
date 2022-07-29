@@ -4,6 +4,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.search_area * {
   font-family: "Open Sans", sans-serif;
 }
 .pac-container {
@@ -25,6 +27,7 @@
   color: #2c3d55;
   font-weight: bold;
 }
+
 .search_area {
   padding: 1.5rem;
   display: flex;
@@ -37,6 +40,7 @@
   border-radius: 8px;
   /* margin will be removed */
   margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 .search_area-left {
   display: grid;
@@ -68,6 +72,7 @@
   outline: none;
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
+  background: none;
 }
 .search_area-input-group button {
   border: none;
@@ -102,8 +107,11 @@
 .search-area--result-content {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 1.5rem;
+}
+.search-area--result-content > div {
+  flex: 1;
 }
 .gearbox-title {
   background: #2c3d55;
@@ -128,7 +136,7 @@
   flex: 1;
   border-radius: 8px;
   padding: 0.5rem;
-  width: 90px;
+  width: 100%;
   transition: 0.2s;
 }
 .gearbox-card:hover {
