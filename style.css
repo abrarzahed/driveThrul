@@ -132,11 +132,21 @@
   transition: 0.2s;
 }
 .gearbox-card:hover {
-  border-color: #d01337;
+  background: #2c3d55;
+}
+.gearbox-card:hover span:nth-child(1),
+.gearbox-card:hover span:nth-child(3) {
+  color: #fff;
+}
+
+.gearbox-card:hover span:nth-child(2) {
+  color: #ddd;
 }
 .gearbox-card:hover span:nth-child(3) {
-  color: #d01337;
   font-weight: bold;
+}
+.gearbox-card span {
+  transition: 0.2s;
 }
 .gearbox-card span:nth-child(1) {
   font-size: 2.7rem;
@@ -214,6 +224,14 @@
   z-index: -1;
   transition: width 0.2s ease;
 }
+.search_area-right span {
+  transition: 0.2s ease;
+}
+.search_area-right a:hover span {
+  text-align: center;
+  flex: 1;
+  font-weight: bold;
+}
 .search_area-right a:hover::before {
   width: 100%;
 }
@@ -283,6 +301,10 @@
   }
   .search_area-input-group button {
     width: 100%;
+  }
+  .search_area--result {
+    border: none;
+    padding: 0;
   }
   .gearbox-cards {
     display: flex;
