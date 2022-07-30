@@ -16,8 +16,7 @@ function initMap() {
   //=== data  ===//
   const postCodeAreaData = [
     {
-      formattedAddress: "London SW1A, UK",
-      areaName: "sw1a",
+      postcodes: ["E14", "E2", "E3", "E1", "E1W"],
       priceList: [
         {
           detail: "2 FULL Hour - Taster Lesson / £60",
@@ -44,6 +43,117 @@ function initMap() {
           detail: "20 Hours - Block OFFER / £610",
           hour: 20,
           price: "£610",
+          gearBox: "automatic",
+          id: 4,
+        },
+      ],
+    },
+    {
+      postcodes: ["E12", "E13", "E15", "E16"],
+      priceList: [
+        {
+          detail: "2 FULL Hour - Taster Lesson / £160",
+          hour: 2,
+          price: "£160",
+          gearBox: "manual",
+          id: 1,
+        },
+        {
+          detail: "5 Hours - Block OFFER / £160",
+          hour: 5,
+          price: "£1160",
+          gearBox: "automatic",
+          id: 2,
+        },
+        {
+          detail: "10 Hours - Block OFFER / £310",
+          hour: 10,
+          price: "£1310",
+          gearBox: "manual",
+          id: 3,
+        },
+        {
+          detail: "20 Hours - Block OFFER / £610",
+          hour: 20,
+          price: "£1610",
+          gearBox: "automatic",
+          id: 4,
+        },
+      ],
+    },
+    {
+      postcodes: [
+        "IG1",
+        "IG4",
+        "IG6",
+        "IG2",
+        "IG8",
+        "E11",
+        "IG3",
+        "IG5",
+        "RM6",
+        "E18",
+        "IG7",
+      ],
+      priceList: [
+        {
+          detail: "2 FULL Hour - Taster Lesson / £260",
+          hour: 2,
+          price: "£260",
+          gearBox: "manual",
+          id: 1,
+        },
+        {
+          detail: "5 Hours - Block OFFER / £160",
+          hour: 5,
+          price: "£2160",
+          gearBox: "automatic",
+          id: 2,
+        },
+        {
+          detail: "10 Hours - Block OFFER / £310",
+          hour: 10,
+          price: "£1310",
+          gearBox: "manual",
+          id: 3,
+        },
+        {
+          detail: "20 Hours - Block OFFER / £610",
+          hour: 20,
+          price: "£2610",
+          gearBox: "automatic",
+          id: 4,
+        },
+      ],
+    },
+    {
+      postcodes: ["E5", "E6", "E7", "E8", "E9"],
+      priceList: [
+        {
+          detail: "2 FULL Hour - Taster Lesson / £260",
+          hour: 2,
+          price: "£260",
+          gearBox: "manual",
+          id: 1,
+        },
+        {
+          detail: "5 Hours - Block OFFER / £160",
+          hour: 5,
+          price: "£2160",
+          gearBox: "automatic",
+          id: 2,
+        },
+        {
+          detail: "10 Hours - Block OFFER / £310",
+          hour: 10,
+          price: "£1310",
+          gearBox: "manual",
+          id: 3,
+        },
+        {
+          detail: "20 Hours - Block OFFER / £610",
+          hour: 20,
+          price: "£2610",
           gearBox: "automatic",
           id: 4,
         },
@@ -125,18 +235,22 @@ function initMap() {
 
   //=== select area  ===//
   const selectArea = function (place) {
-    selectedArea = postCodeAreaData.find(
-      (item) => item.areaName == place.name.toLowerCase()
+    console.log("place", place);
+    selectedArea = postCodeAreaData.find((item) =>
+      item.postcodes.includes(place.name)
     );
     if (!selectedArea) {
       showResult(selectedArea, false);
     } else {
+      selectedArea.formattedAddress = place.formatted_address;
       showResult(selectedArea, true);
     }
+    console.log("selected area", selectedArea);
   };
 
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
+
     selectArea(place);
 
     if (!place.geometry || !place.geometry.location) {
