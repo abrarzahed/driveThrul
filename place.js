@@ -235,10 +235,15 @@ function initMap() {
 
   //=== select area  ===//
   const selectArea = function (place) {
-    console.log("place", place);
-    selectedArea = postCodeAreaData.find((item) =>
-      item.postcodes.includes(place.name)
-    );
+    const itemName = place.name;
+    console.log("place", place, itemName);
+    selectedArea = postCodeAreaData.find((item) => {
+      if (item.postcodes.includes(place.name) || itemName.startsWith("E14 ")) {
+        return item;
+      }
+      // return item.postcodes.includes(place.name);
+    });
+
     if (!selectedArea) {
       showResult(selectedArea, false);
     } else {
