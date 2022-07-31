@@ -106,13 +106,25 @@
 }
 .search-area--result-content {
   width: 100%;
-  display: flex;
+  /* display: flex; */
+  gap: 0.6rem;
   /* justify-content: space-between; */
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
+}
+.search-area--result-content-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+.search-area--result-content-header h3 {
+  flex: 1;
 }
 .search-area--result-content > div {
   flex: 1;
+  transition: 0.2s;
+  overflow: hidden;
 }
+
 .gearbox-title {
   background: #2c3d55;
   padding: 0.3rem;
@@ -120,6 +132,14 @@
   font-weight: 400;
   color: #eee;
   border-radius: 4px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.gearbox-title.disabled {
+  background: #eee;
+  border: 1px solid #2c3d55;
+  color: #2c3d55;
+  transition: 0.2s;
 }
 .gearbox-cards {
   display: flex;
@@ -127,7 +147,21 @@
   width: 100%;
   gap: 0.6rem;
   margin-top: 1rem;
+  transition: 0.3s linear;
 }
+.gearbox-cards.disabled {
+  margin-top: 0;
+  opacity: 0;
+  max-height: 0;
+  max-width: 0;
+}
+.manual-cards.disabled {
+  transform: translateX(100%);
+}
+.auto-cards.disabled {
+  transform: translateX(-100%);
+}
+
 .gearbox-card {
   display: grid;
   place-items: center;
@@ -138,6 +172,12 @@
   padding: 0.5rem;
   width: 100%;
   transition: 0.2s;
+}
+.auto-cards .gearbox-card {
+  border-color: #72c02d;
+}
+.manual-cards .gearbox-card {
+  border-color: #007bff;
 }
 .gearbox-card:hover {
   background: #2c3d55;
