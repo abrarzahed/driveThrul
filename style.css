@@ -210,18 +210,18 @@
   text-decoration: none;
   margin-top: 0.5rem;
   font-size: 14px;
-  border: 1px solid #a10f2b;
-  color: #a10f2b;
+  background: #a10f2b;
+  color: #fff;
   width: 100%;
   text-align: center;
   padding: 0.5rem;
   font-weight: 700;
-  border-radius: 8px;
+  border-radius: 50px;
   transition: 0.2s;
 }
 .gearbox-link:hover {
-  background: #a10f2b;
-  color: #fff;
+  color: #a10f2b;
+  background: #fff;
 }
 .search_area--result.hidden {
   width: 0;
@@ -256,19 +256,20 @@
   text-align: center;
   text-decoration: none;
   color: #fff;
-  border-radius: 8px;
+  border-radius: 100px;
   gap: 0.5rem;
   transition: 0.2s;
   position: relative;
+  overflow: hidden;
 }
 .search_area-right a::before {
   position: absolute;
   content: "";
   height: 100%;
   background: #d01337;
-  width: 10%;
+  width: 15%;
   left: 0;
-  border-radius: 8px;
+  border-radius: 100px;
   z-index: -1;
   transition: width 0.2s ease;
 }
