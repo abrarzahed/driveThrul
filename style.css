@@ -335,7 +335,7 @@
     flex-direction: column;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .search_area-input-group {
     flex-direction: column;
     gap: 0.5rem;
