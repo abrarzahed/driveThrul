@@ -101,6 +101,67 @@ function initMap() {
       },
     ],
   };
+  const se1Data = {
+    postcodes: ["SE1"],
+    priceList: [
+      {
+        detail: "2 FULL Hour - Taster Lesson / £60",
+        hour: 2,
+        price: "£160",
+        gearBox: "manual",
+        id: 1,
+      },
+      {
+        detail: "5 Hours - Block OFFER / £160",
+        hour: 5,
+        price: "£260",
+        gearBox: "manual",
+        id: 2,
+      },
+      {
+        detail: "10 Hours - Block OFFER / £310",
+        hour: 10,
+        price: "£1310",
+        gearBox: "manual",
+        id: 3,
+      },
+      {
+        detail: "20 Hours - Block OFFER / £610",
+        hour: 20,
+        price: "£1610",
+        gearBox: "manual",
+        id: 4,
+      },
+      {
+        detail: "2 FULL Hour - Taster Lesson / £60",
+        hour: 2,
+        price: "£160",
+        gearBox: "automatic",
+        id: 5,
+      },
+      {
+        detail: "5 Hours - Block OFFER / £160",
+        hour: 5,
+        price: "£260",
+        gearBox: "automatic",
+        id: 6,
+      },
+      {
+        detail: "10 Hours - Block OFFER / £310",
+        hour: 10,
+        price: "£1310",
+        gearBox: "automatic",
+        id: 7,
+      },
+      {
+        detail: "20 Hours - Block OFFER / £610",
+        hour: 20,
+        price: "£1610",
+        gearBox: "automatic",
+        id: 8,
+      },
+    ],
+  };
 
   let selectedArea = {};
 
@@ -125,10 +186,11 @@ function initMap() {
       priceCardsManual.innerHTML = "";
       priceCardsAuto.innerHTML = "";
 
-      allData.priceList
-        .filter((a) => a.gearBox === "manual")
-        .forEach((area) => {
-          priceCardsManual.innerHTML += `
+      if (area.name === "SE1") {
+        se1Data.priceList
+          .filter((a) => a.gearBox === "manual")
+          .forEach((area) => {
+            priceCardsManual.innerHTML += `
         <div class="gearbox-card">
         <span>${area.hour}</span>
         <span>Hours</span>
@@ -136,12 +198,12 @@ function initMap() {
         <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
         </div>
         `;
-        });
+          });
 
-      allData.priceList
-        .filter((a) => a.gearBox === "automatic")
-        .forEach((area) => {
-          priceCardsAuto.innerHTML += `
+        se1Data.priceList
+          .filter((a) => a.gearBox === "automatic")
+          .forEach((area) => {
+            priceCardsAuto.innerHTML += `
         <div class="gearbox-card">
         <span>${area.hour}</span>
         <span>Hours</span>
@@ -149,7 +211,34 @@ function initMap() {
         <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
         </div>
         `;
-        });
+          });
+      } else {
+        allData.priceList
+          .filter((a) => a.gearBox === "manual")
+          .forEach((area) => {
+            priceCardsManual.innerHTML += `
+        <div class="gearbox-card">
+        <span>${area.hour}</span>
+        <span>Hours</span>
+        <span>${area.price}</span>
+        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
+        </div>
+        `;
+          });
+
+        allData.priceList
+          .filter((a) => a.gearBox === "automatic")
+          .forEach((area) => {
+            priceCardsAuto.innerHTML += `
+        <div class="gearbox-card">
+        <span>${area.hour}</span>
+        <span>Hours</span>
+        <span>${area.price}</span>
+        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
+        </div>
+        `;
+          });
+      }
 
       const cardButtons = document.querySelectorAll(".gearbox-link");
       [...cardButtons].forEach((btn) => {
@@ -178,19 +267,17 @@ function initMap() {
   //=== select area  ===//
   const selectArea = function (place) {
     const itemName = place.name;
-    console.log("place", place);
+
     selectedArea = allData.postcodes.some((item) => {
-      // console.log(item);
-      // console.log(itemName.startsWith(item + " "));
       return itemName.startsWith(item + " ") || item === itemName;
     });
-
-    console.log("selectedArea", selectedArea);
+    if (itemName.includes("SE1")) {
+      selectedArea = true;
+    }
 
     if (!selectedArea) {
       showResult(undefined, false);
     } else {
-      // selectedArea.formattedAddress = place.formatted_address;
       showResult(place, true);
     }
   };

@@ -20,10 +20,7 @@
 .pac-item:nth-child(1) {
   border: none;
 }
-/* .pac-icon {
-  font-size: 3rem !important;
-  width: 30px;
-} */
+
 .pac-item-query {
   color: #2c3d55;
   font-weight: bold;
@@ -107,10 +104,8 @@
 }
 .search-area--result-content {
   width: 100%;
-  /* display: flex; */
   gap: 0.6rem;
-  /* justify-content: space-between; */
-  /* gap: 1.5rem; */
+  padding: 0;
 }
 .search-area--result-content-header {
   display: flex;
@@ -149,9 +144,11 @@
   gap: 0.6rem;
   margin-top: 1rem;
   transition: 0.3s linear;
+  align-items: stretch;
 }
 .gearbox-cards.disabled {
-  margin-top: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
   max-height: 0;
   max-width: 0;
@@ -173,6 +170,7 @@
   padding: 0.5rem;
   width: 100%;
   transition: 0.2s;
+  min-width: 100px;
 }
 .auto-cards .gearbox-card {
   border-color: #72c02d;
@@ -182,6 +180,7 @@
 }
 .gearbox-card:hover {
   background: #2c3d55;
+  border: none;
 }
 .gearbox-card:hover span:nth-child(1),
 .gearbox-card:hover span:nth-child(3) {
@@ -290,6 +289,12 @@
     gap: 2rem;
     padding: 1rem;
   }
+  .search_area-left {
+    width: 100%;
+  }
+  .search_area-right {
+    width: 100%;
+  }
 }
 @media (max-width: 768px) {
   .search_area-input-group {
@@ -297,9 +302,6 @@
     justify-content: center;
     text-align: center;
     padding: 0.4rem 0.6rem;
-  }
-  .search_area-left {
-    width: 100%;
   }
 
   .search_area-input-group button {
@@ -311,12 +313,7 @@
     padding: 0.4rem 0.6rem;
     font-size: 0.9rem;
   }
-  .search_area-right {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.7rem;
-  }
+
   .search_area--result {
     flex-direction: column;
     text-align: center;
@@ -335,22 +332,16 @@
     flex-direction: column;
   }
 }
-@media (max-width: 450px) {
+
+@media (max-width: 530px) {
   .search_area-input-group {
-    flex-direction: column;
     gap: 0.5rem;
   }
   .search_area-input-group input {
-    border: 1px solid #ddd;
     font-size: 12px;
     width: 100%;
-    border-radius: 4px;
-    margin-top: 1rem;
-    text-align: center;
   }
-  .search_area-input-group button {
-    width: 100%;
-  }
+
   .search_area--result {
     border: none;
     padding: 0;
@@ -360,10 +351,9 @@
     justify-content: space-between;
     width: 100%;
     gap: 0.6rem;
-    margin-top: 1rem;
-    flex-direction: column;
+    flex-wrap: wrap;
   }
   .gearbox-card {
-    width: 100%;
+    min-width: 150px;
   }
 }
