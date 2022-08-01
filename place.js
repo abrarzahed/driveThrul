@@ -186,7 +186,7 @@ function initMap() {
       priceCardsManual.innerHTML = "";
       priceCardsAuto.innerHTML = "";
 
-      if (area.name === "SE1") {
+      if (area.name === "SE1" || area.name.startsWith("SE1 ")) {
         se1Data.priceList
           .filter((a) => a.gearBox === "manual")
           .forEach((area) => {
