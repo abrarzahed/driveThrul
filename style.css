@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .search_area * {
   font-family: "Open Sans", sans-serif;
 }
@@ -334,7 +335,7 @@
     flex-direction: column;
   }
 }
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .search_area-input-group {
     flex-direction: column;
     gap: 0.5rem;

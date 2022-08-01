@@ -220,8 +220,6 @@ function initMap() {
   autocomplete.addListener("place_changed", () => {
     const place = autocomplete.getPlace();
 
-    console.log();
-
     selectArea(place);
   });
 }
