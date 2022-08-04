@@ -113,7 +113,6 @@ COMMENT: contact form starts here
               <select class="form-control price-dropdown" name="lesson">
                 <option disabled selected value>-- select an option --</option>
                 <option>2 FULL Hour - Taster Lesson / £60</option>
-
                 <option>5 Hours - Block OFFER / £160</option>
                 <option>10 Hours - Block OFFER / £310</option>
                 <option>20 Hours - Block OFFER / £610</option>
@@ -210,7 +209,11 @@ COMMENT: contact form ends here
         COMMENT: Select dynamic price
       */
         const priceDomEl = document.querySelector(".price-dropdown");
+        priceDomEl.options.add(
+          new Option(selectedPackage.detail, selectedPackage.detail)
+        );
         priceDomEl.value = selectedPackage.detail;
+        priceDomEl.disabled = true;
       }
 
       /* 

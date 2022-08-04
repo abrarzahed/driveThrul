@@ -51,6 +51,7 @@
   font-size: 28px;
   color: #555;
   text-transform: capitalize;
+  text-align: left !important;
 }
 .search_area-input-group {
   display: flex;
@@ -211,16 +212,17 @@
   margin-top: 0.5rem;
   font-size: 14px;
   background: #a10f2b;
-  color: #fff;
+  color: #fff !important;
   width: 100%;
   text-align: center;
   padding: 0.5rem;
   font-weight: 700;
   border-radius: 50px;
   transition: 0.2s;
+  cursor: pointer;
 }
 .gearbox-link:hover {
-  color: #a10f2b;
+  color: #a10f2b !important;
   background: #fff;
 }
 .search_area--result.hidden {

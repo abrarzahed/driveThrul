@@ -105,60 +105,60 @@ function initMap() {
     postcodes: ["SE1"],
     priceList: [
       {
-        detail: "2 FULL Hour - Taster Lesson / £60",
+        detail: "2 FULL Hour - Taster Lesson / £65",
         hour: 2,
-        price: "£160",
+        price: "£65",
         gearBox: "manual",
-        id: 1,
+        id: 9,
       },
       {
-        detail: "5 Hours - Block OFFER / £160",
+        detail: "5 Hours - Block OFFER / £165",
         hour: 5,
-        price: "£260",
+        price: "£165",
         gearBox: "manual",
-        id: 2,
+        id: 10,
       },
       {
-        detail: "10 Hours - Block OFFER / £310",
+        detail: "10 Hours - Block OFFER / £315",
         hour: 10,
-        price: "£1310",
+        price: "£315",
         gearBox: "manual",
-        id: 3,
+        id: 11,
       },
       {
-        detail: "20 Hours - Block OFFER / £610",
+        detail: "20 Hours - Block OFFER / £615",
         hour: 20,
-        price: "£1610",
+        price: "£615",
         gearBox: "manual",
-        id: 4,
+        id: 12,
       },
       {
-        detail: "2 FULL Hour - Taster Lesson / £60",
+        detail: "2 FULL Hour - Taster Lesson / £65",
         hour: 2,
-        price: "£160",
+        price: "£65",
         gearBox: "automatic",
-        id: 5,
+        id: 13,
       },
       {
-        detail: "5 Hours - Block OFFER / £160",
+        detail: "5 Hours - Block OFFER / £165",
         hour: 5,
-        price: "£260",
+        price: "£165",
         gearBox: "automatic",
-        id: 6,
+        id: 14,
       },
       {
-        detail: "10 Hours - Block OFFER / £310",
+        detail: "10 Hours - Block OFFER / £315",
         hour: 10,
-        price: "£1310",
+        price: "£315",
         gearBox: "automatic",
-        id: 7,
+        id: 15,
       },
       {
-        detail: "20 Hours - Block OFFER / £610",
+        detail: "20 Hours - Block OFFER / £615",
         hour: 20,
-        price: "£1610",
+        price: "£615",
         gearBox: "automatic",
-        id: 8,
+        id: 16,
       },
     ],
   };
@@ -186,8 +186,8 @@ function initMap() {
       priceCardsManual.innerHTML = "";
       priceCardsAuto.innerHTML = "";
 
-      if (area.name === "SE1" || area.name.startsWith("SE1 ")) {
-        se1Data.priceList
+      const checkAreaAndShowPrice = (data) => {
+        data.priceList
           .filter((a) => a.gearBox === "manual")
           .forEach((area) => {
             priceCardsManual.innerHTML += `
@@ -195,12 +195,12 @@ function initMap() {
         <span>${area.hour}</span>
         <span>Hours</span>
         <span>${area.price}</span>
-        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
+        <a data-id = "${area.id}" class="gearbox-link">BOOK</a>
         </div>
         `;
           });
 
-        se1Data.priceList
+        data.priceList
           .filter((a) => a.gearBox === "automatic")
           .forEach((area) => {
             priceCardsAuto.innerHTML += `
@@ -208,54 +208,36 @@ function initMap() {
         <span>${area.hour}</span>
         <span>Hours</span>
         <span>${area.price}</span>
-        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
-        </div>
-        `;
-          });
-      } else {
-        allData.priceList
-          .filter((a) => a.gearBox === "manual")
-          .forEach((area) => {
-            priceCardsManual.innerHTML += `
-        <div class="gearbox-card">
-        <span>${area.hour}</span>
-        <span>Hours</span>
-        <span>${area.price}</span>
-        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
+        <a data-id = "${area.id}" class="gearbox-link">BOOK</a>
         </div>
         `;
           });
 
-        allData.priceList
-          .filter((a) => a.gearBox === "automatic")
-          .forEach((area) => {
-            priceCardsAuto.innerHTML += `
-        <div class="gearbox-card">
-        <span>${area.hour}</span>
-        <span>Hours</span>
-        <span>${area.price}</span>
-        <a href="area.html" data-id = "${area.id}" class="gearbox-link">BOOK</a>
-        </div>
-        `;
-          });
-      }
+        const cardButtons = document.querySelectorAll(".gearbox-link");
 
-      const cardButtons = document.querySelectorAll(".gearbox-link");
-      [...cardButtons].forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-          e.preventDefault();
-          const selectedId = +btn.dataset.id;
-          const selectedPackage = allData.priceList.find(
-            (ar) => ar.id === selectedId
-          );
-          console.log(selectedPackage);
-          localStorage.setItem(
-            "selectedPackage",
-            JSON.stringify(selectedPackage)
-          );
-          window.location.assign("area.html");
+        [...cardButtons].forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            console.log("btn clicked");
+            e.preventDefault();
+            const selectedId = +btn.dataset.id;
+            const selectedPackage = data.priceList.find(
+              (ar) => ar.id === selectedId
+            );
+            console.log(selectedPackage);
+            localStorage.setItem(
+              "selectedPackage",
+              JSON.stringify(selectedPackage)
+            );
+            window.location.assign("area.html");
+          });
         });
-      });
+      };
+
+      if (area.name === "SE1" || area.name.startsWith("SE1 ")) {
+        checkAreaAndShowPrice(se1Data);
+      } else {
+        checkAreaAndShowPrice(allData);
+      }
 
       resultDiv.classList.remove("not-found");
     } else {
@@ -271,7 +253,8 @@ function initMap() {
     selectedArea = allData.postcodes.some((item) => {
       return itemName.startsWith(item + " ") || item === itemName;
     });
-    if (itemName.includes("SE1")) {
+
+    if (itemName.startsWith("SE1 ") || itemName === "SE1") {
       selectedArea = true;
     }
 
