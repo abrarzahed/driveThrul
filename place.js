@@ -182,7 +182,7 @@ function initMap() {
     resultDiv.classList.remove("hidden");
 
     if (isAreaAvailable) {
-      resultAreaName.textContent = area.formatted_address;
+      resultAreaName.textContent = "";
       priceCardsManual.innerHTML = "";
       priceCardsAuto.innerHTML = "";
 
