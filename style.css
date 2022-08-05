@@ -317,7 +317,7 @@
   .search_area-input-group input {
     outline: none;
     padding: 0.4rem 0.6rem;
-    font-size: 0.9rem;
+    font-size: 16px !important;
   }
 
   .search_area--result {
@@ -328,7 +328,7 @@
     width: 15%;
   }
   .search_area-left--title {
-    font-size: 18px;
+    font-size: 24px;
   }
   .search-area--result-content {
     width: 100%;
@@ -344,7 +344,6 @@
     gap: 0.5rem;
   }
   .search_area-input-group input {
-    font-size: 12px;
     width: 100%;
   }
 
