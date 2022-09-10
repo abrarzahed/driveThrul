@@ -10,6 +10,7 @@ function initMap() {
   const options = {
     fields: ["formatted_address", "geometry", "name"],
     strictBounds: false,
+    componentRestrictions: { country: "uk" },
     types: ["(regions)"],
   };
 
